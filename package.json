@@ -1,0 +1,19 @@
+{
+  "name": "gulptask-sass",
+  "version": "0.1.0",
+  "description": "sass to css convert task for gulp.js",
+  "main": "./index.js",
+  "repository": "https://MasatoMakino@github.com/MasatoMakino/gulptask-sass.git",
+  "author": "MasatoMakino <unagiinu.g@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^4.0.2",
+    "node-sass-package-importer": "^5.3.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.17.0"
+  }
+}
