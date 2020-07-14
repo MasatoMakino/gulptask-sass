@@ -8,14 +8,13 @@ const path = require("path");
 
 /**
  * sassファイルをcssに変換、出力するgulpタスク。
- * @param {string | string[]}entryPoints 変換対象のsass e.g. ["./src/sass/style.sass"]
- * @param {string} destDir 出力ディレクトリ e.g. "./dist"
- * @return {function(): *}
+ * @param entryPoints 変換対象のsass e.g. ["./src/sass/style.sass"]
+ * @param destDir 出力ディレクトリ e.g. "./dist"
  */
-module.exports = (entryPoints, destDir) => {
+export function get(entryPoints: string | string[], destDir: string): Function {
   destDir = path.resolve(process.cwd(), destDir);
 
-  const sassTask = () => {
+  return () => {
     return src(entryPoints)
       .pipe(plumber())
       .pipe(
@@ -27,5 +26,4 @@ module.exports = (entryPoints, destDir) => {
       .pipe(autoprefixer())
       .pipe(dest(destDir));
   };
-  return sassTask;
-};
+}
