@@ -21,7 +21,7 @@ module.exports = (entryPoints, destDir) => {
       .pipe(
         sass({
           outputStyle: "compressed",
-          importer: packageImporter()
+          importer: packageImporter(),
         })
       )
       .pipe(autoprefixer())
