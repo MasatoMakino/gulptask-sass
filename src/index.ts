@@ -5,7 +5,7 @@ const sass = require("gulp-sass");
 const packageImporter = require("node-sass-package-importer");
 const autoprefixer = require("gulp-autoprefixer");
 const path = require("path");
-const glob = require("glob");
+const globby = require("globby");
 
 /**
  * sassファイルをcssに変換、出力するgulpタスク。
@@ -32,7 +32,7 @@ export function get(entryPoints: string | string[], destDir: string): Function {
 }
 
 const existsTarget = (entryPoints: string | string[]) => {
-  const targets = glob.sync(entryPoints);
+  const targets = globby.sync(entryPoints);
   if (targets == null || targets.length === 0) {
     console.error(
       "\x1b[31m%s\x1b[0m",
