@@ -8,11 +8,23 @@ const path = require("path");
 const globby = require("globby");
 
 /**
+ * @deprecated Use generateTask
+ * @param entryPoints
+ * @param destDir
+ */
+export function get(entryPoints: string | string[], destDir: string): Function {
+  return generateTask(entryPoints, destDir);
+}
+
+/**
  * sassファイルをcssに変換、出力するgulpタスク。
  * @param entryPoints 変換対象のsass e.g. ["./src/sass/style.sass"]
  * @param destDir 出力ディレクトリ e.g. "./dist"
  */
-export function get(entryPoints: string | string[], destDir: string): Function {
+export function generateTask(
+  entryPoints: string | string[],
+  destDir: string
+): Function {
   destDir = path.resolve(process.cwd(), destDir);
 
   return () => {
@@ -36,7 +48,7 @@ const existsTarget = (entryPoints: string | string[]) => {
   if (targets == null || targets.length === 0) {
     console.error(
       "\x1b[31m%s\x1b[0m",
-`gulptask-sass : Error no target files.
+      `gulptask-sass : Error no target files.
     The file specified by ${entryPoints} does not exist. The SASS conversion task exits without outputting anything.
     ${entryPoints}で指定されたファイルが存在しません。SASS変換タスクは何も出力せずに終了します。`
     );
