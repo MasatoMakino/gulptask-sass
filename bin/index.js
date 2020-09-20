@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.get = void 0;
+exports.generateTask = exports.get = void 0;
 const { src, dest } = require("gulp");
 const plumber = require("gulp-plumber");
 const sass = require("gulp-sass");
@@ -9,11 +9,20 @@ const autoprefixer = require("gulp-autoprefixer");
 const path = require("path");
 const globby = require("globby");
 /**
+ * @deprecated Use generateTask
+ * @param entryPoints
+ * @param destDir
+ */
+function get(entryPoints, destDir) {
+    return generateTask(entryPoints, destDir);
+}
+exports.get = get;
+/**
  * sassファイルをcssに変換、出力するgulpタスク。
  * @param entryPoints 変換対象のsass e.g. ["./src/sass/style.sass"]
  * @param destDir 出力ディレクトリ e.g. "./dist"
  */
-function get(entryPoints, destDir) {
+function generateTask(entryPoints, destDir) {
     destDir = path.resolve(process.cwd(), destDir);
     return () => {
         existsTarget(entryPoints);
@@ -27,7 +36,7 @@ function get(entryPoints, destDir) {
             .pipe(dest(destDir));
     };
 }
-exports.get = get;
+exports.generateTask = generateTask;
 const existsTarget = (entryPoints) => {
     const targets = globby.sync(entryPoints);
     if (targets == null || targets.length === 0) {
