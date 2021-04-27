@@ -1,6 +1,6 @@
 {
   "name": "gulptask-sass",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "sass to css convert task for gulp.js",
   "main": "./bin/index.js",
   "types": "./bin/index.d.ts",
