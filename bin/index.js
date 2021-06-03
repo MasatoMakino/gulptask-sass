@@ -38,7 +38,9 @@ const makeDir = __importStar(require("make-dir"));
  * sassファイルをcssに変換、出力するgulpタスク。
  */
 function generateTask(option) {
+    var _a;
     option.distDir = path.resolve(process.cwd(), option.distDir);
+    (_a = option.includePaths) !== null && _a !== void 0 ? _a : (option.includePaths = [path.resolve(process.cwd(), "node_modules")]);
     return () => __awaiter(this, void 0, void 0, function* () {
         existsTarget(option.entryPoints);
         const targets = globby.sync(option.entryPoints);
@@ -48,6 +50,7 @@ function generateTask(option) {
                 file: target,
                 outFile: outPath,
                 outputStyle: "compressed",
+                includePaths: option.includePaths,
             });
             makeDir.sync(path.parse(outPath).dir);
             fs.writeFileSync(outPath, result.css);
